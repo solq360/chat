@@ -39,7 +39,7 @@ public class AudioConfig {
 
     }
     public void buildTrackBuffer() {
-        this.trackBufferSize = AudioTrack.getMinBufferSize(this.sampleRateInHz, this.channelOut, this.audioFormat )*2;
+        this.trackBufferSize = AudioTrack.getMinBufferSize(this.sampleRateInHz, this.channelOut, this.audioFormat );
     }
 
     //getter

@@ -1,9 +1,10 @@
 package org.son.chat.core;
 
 /**
+ * 语音行为接口
  * Created by luojie on 15/4/18.
  */
-public interface IVoice {
+public interface IAudio {
     public void createRecord();
     public void createPlay();
 
