@@ -7,4 +7,7 @@ public class IocException extends RuntimeException {
     public IocException(String msg){
         super(msg);
     }
+    public IocException(String msg,Throwable tr){
+        super(msg,tr);
+    }
 }

@@ -8,6 +8,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import org.son.chat.ioc.exception.IocException;
+import org.son.chat.util.LogUtil;
+import org.son.chat.util.Logger;
 
 import java.lang.reflect.Method;
 
@@ -15,6 +17,7 @@ import java.lang.reflect.Method;
  * @author solq
  */
 public class EventListener implements OnClickListener, OnLongClickListener, OnItemClickListener, OnItemLongClickListener {
+    private final static Logger LOGGER = LogUtil.getLogger(EventListener.class);
 
     private Object target;
     private EventType eventType;
@@ -33,9 +36,11 @@ public class EventListener implements OnClickListener, OnLongClickListener, OnIt
     @Override
     public void onClick(View v) {
         try {
-             method.invoke(target, ClickEvent.valueOf(v));
+            method.invoke(target, ClickEvent.valueOf(v));
         } catch (Exception e) {
-            throw new IocException("执行事件错误 ：" + target.getClass() + " method :" + this.method.getName());
+            final String msg = "执行事件错误 ：" + target.getClass() + " method :" + this.method.getName();
+            LOGGER.e(msg, e);
+            throw new IocException(msg, e);
         }
     }
 
@@ -44,7 +49,10 @@ public class EventListener implements OnClickListener, OnLongClickListener, OnIt
         try {
             method.invoke(target, ItemClickEvent.valueOf(parent, view, position, id));
         } catch (Exception e) {
-            throw new IocException("执行事件错误 ：" + target.getClass() + " method :" + this.method.getName());
+
+            final String msg = "执行事件错误 ：" + target.getClass() + " method :" + this.method.getName();
+            LOGGER.e(msg, e);
+            throw new IocException(msg, e);
         }
     }
 
@@ -53,7 +61,10 @@ public class EventListener implements OnClickListener, OnLongClickListener, OnIt
         try {
             return (boolean) method.invoke(target, ItemLongClickEvent.valueOf(parent, view, position, id));
         } catch (Exception e) {
-            throw new IocException("执行事件错误 ：" + target.getClass() + " method :" + this.method.getName());
+
+            final String msg = "执行事件错误 ：" + target.getClass() + " method :" + this.method.getName();
+            LOGGER.e(msg, e);
+            throw new IocException(msg, e);
         }
     }
 
@@ -63,7 +74,10 @@ public class EventListener implements OnClickListener, OnLongClickListener, OnIt
         try {
             return (boolean) method.invoke(target, LongClickEvent.valueOf(v));
         } catch (Exception e) {
-            throw new IocException("执行事件错误 ：" + target.getClass() + " method :" + this.method.getName());
+
+            final String msg = "执行事件错误 ：" + target.getClass() + " method :" + this.method.getName();
+            LOGGER.e(msg, e);
+            throw new IocException(msg, e);
         }
     }
 }
