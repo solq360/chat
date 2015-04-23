@@ -1,26 +1,15 @@
 package org.son.chat;
 
-import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import org.son.chat.core.AudioConfig;
 import org.son.chat.core.FileAudio;
-import org.son.chat.core.IAudio;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import org.son.chat.ioc.anno.EventInject;
+import org.son.chat.ioc.model.ClickEvent;
+import org.son.chat.ioc.model.EventType;
+import org.son.chat.ioc.util.InjectUtil;
 
 
 /**
@@ -31,34 +20,53 @@ public class MainActivity extends ActionBarActivity {
 
     private FileAudio fileAudio;
 
+//    @ViewInject(R.id.play)
+//    private Button but_play;
+//    @ViewInject(R.id.record)
+//    private Button but_record;
+
+
+    @EventInject(value = {R.id.play}, eventType = EventType.Click)
+    private void testBntPlay(ClickEvent event) {
+        fileAudio.play();
+        System.out.println("play");
+    }
+
+
+    @EventInject(value = {R.id.record}, eventType = EventType.Click)
+    private void testBntRecord(ClickEvent event) {
+        fileAudio.record();
+        System.out.println("record");
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InjectUtil.initInjected(this);
         //bnt bind click event
-        fileAudio= new FileAudio();
-        Button but_play = (Button) findViewById(R.id.play);
-        Button but_record = (Button) findViewById(R.id.record);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.record:
-                        fileAudio.record();
-                        System.out.println("record");
-                        break;
-                    case R.id.play:
-                        fileAudio.play();
-                        System.out.println("play");
-
-                        break;
-                }
-            }
-        };
-        but_play.setOnClickListener(listener);
-        but_record.setOnClickListener(listener);
+        fileAudio = new FileAudio();
+//        Button but_play = (Button) findViewById(R.id.play);
+//        Button but_record = (Button) findViewById(R.id.record);
+//        View.OnClickListener listener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                switch (v.getId()) {
+//                    case R.id.record:
+//                        fileAudio.record();
+//                        System.out.println("record");
+//                        break;
+//                    case R.id.play:
+//                        fileAudio.play();
+//                        System.out.println("play");
+//
+//                        break;
+//                }
+//            }
+//        };
+//        but_play.setOnClickListener(listener);
+//        but_record.setOnClickListener(listener);
     }
 
     @Override
