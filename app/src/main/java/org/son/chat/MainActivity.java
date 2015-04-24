@@ -47,26 +47,7 @@ public class MainActivity extends ActionBarActivity {
         InjectUtil.initInjected(this);
         //bnt bind click event
         fileAudio = new FileAudio();
-//        Button but_play = (Button) findViewById(R.id.play);
-//        Button but_record = (Button) findViewById(R.id.record);
-//        View.OnClickListener listener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switch (v.getId()) {
-//                    case R.id.record:
-//                        fileAudio.record();
-//                        System.out.println("record");
-//                        break;
-//                    case R.id.play:
-//                        fileAudio.play();
-//                        System.out.println("play");
-//
-//                        break;
-//                }
-//            }
-//        };
-//        but_play.setOnClickListener(listener);
-//        but_record.setOnClickListener(listener);
+
     }
 
     @Override

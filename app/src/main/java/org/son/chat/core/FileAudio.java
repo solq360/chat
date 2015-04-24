@@ -1,6 +1,6 @@
 package org.son.chat.core;
 
-import android.os.Environment;
+import org.son.chat.util.SDCardUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
  * Created by luojie on 15/4/22.
  */
 public class FileAudio extends AbstractAudio {
-    private String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/a.pcm";
+    private String fileName = SDCardUtil.getPath("/a.pcm");
 
     @Override
     public void record() {
